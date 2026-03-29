@@ -1,97 +1,232 @@
-🚗 Smart ANPR System — Team 11
-Automatic Number Plate Recognition for Gated Communities & Parking
+# Smart ANPR System for Gated Communities 🚗
 
-PGDM Artificial Intelligence & Data Science | Computer Vision Project
-Adani Institute of Digital Technology Management
+An **AI-powered Automatic Number Plate Recognition (ANPR) system** designed for gated communities and parking areas.
+The system automatically detects vehicle number plates, reads the plate number, verifies it with a database, and logs entry or exit events in real time.
 
-👥 Team Members
-Name	Branch
-Srashti Soni	AI & DS
-Dwiti Budh	AI & DS
-Digesh Patel	AI & DS
-Ravindra Tanwar	AI & DS
-Priya A	AI & DS
-📌 Project Overview
-An end-to-end intelligent vehicle entry management system that automatically detects, reads, and authenticates Indian number plates in real-time — under any lighting condition, from multiple camera angles, with a full analytics and alert dashboard.
+This project uses **YOLOv8 for number plate detection**, **EasyOCR for character recognition**, and **Flask for building the web interface and API**.
 
-Powered by: YOLOv8 + EasyOCR + Flask
+---
 
-✨ Features
-🎥 Live Camera Detection — Real-time MJPEG stream with YOLOv8
-🔤 Indian Plate OCR — EasyOCR with CLAHE + fuzzy correction
-🌙 Night Mode — Auto gamma/CLAHE pipeline below brightness 85
-📷 Multi-Camera — Up to 4 simultaneous streams
-⚡ Speed Estimation — Zone-based overspeed alerts
-📊 Analytics Dashboard — 8 chart types including anomaly detection
-🔒 Access Control — Allow/Deny with blacklist support
-🅿️ Parking Slot Management — Auto slot assign/free
-📈 Performance
-Metric	Value
-Plate Detection Accuracy	~95%
-OCR Read Accuracy	~88%
-mAP@0.5	0.91
-End-to-End Detection	< 2s
-Live Stream FPS	25 FPS
-Fuzzy Match Success	~96%
-🛠️ Tech Stack
-YOLOv8 (Ultralytics) — plate detection
-EasyOCR — character recognition
-Flask — REST API + MJPEG streaming
-OpenCV — image enhancement
-SQLite — embedded database
-Vanilla HTML/CSS/JS — frontend dashboard
-🚀 How to Run
-1. Install dependencies
-pip install flask opencv-python ultralytics easyocr
-2. Run the app
+# 📌 Project Overview
+
+Manual vehicle entry systems used in many gated communities are slow and prone to errors. Security guards often record vehicle numbers manually, which can lead to long queues and inaccurate logs.
+
+The **Smart ANPR System** solves this problem by automating the entire process.
+
+The system can:
+
+* Detect number plates from camera input
+* Read the plate characters using OCR
+* Verify vehicles using a database
+* Allow or deny entry automatically
+* Maintain a digital record of all vehicles
+* Provide analytics through a dashboard
+
+---
+
+# ⚙️ System Workflow
+
+The project follows a simple pipeline:
+
+1. **Capture Image**
+
+   * Image is captured from a live camera or uploaded manually.
+
+2. **Plate Detection**
+
+   * YOLOv8 detects the number plate region in the image.
+
+3. **Plate Cropping**
+
+   * The detected number plate area is cropped.
+
+4. **OCR Recognition**
+
+   * EasyOCR reads the characters on the plate.
+
+5. **Database Verification**
+
+   * The system checks whether the vehicle is registered or blacklisted.
+
+6. **Decision**
+
+   * The system allows or denies entry and logs the event.
+
+---
+
+# 🚀 Key Features
+
+* **Real-Time Number Plate Detection**
+* **Automatic Vehicle Entry and Exit Logging**
+* **OCR-Based Plate Recognition**
+* **Night Mode Image Enhancement**
+* **Multi-Camera Support**
+* **Vehicle Type Detection (Car / SUV / Bike / Truck)**
+* **Speed Estimation and Overspeed Alerts**
+* **Analytics Dashboard for Traffic Insights**
+* **Secure Database Logging**
+
+---
+
+# 🧠 Technologies Used
+
+### Computer Vision & AI
+
+* YOLOv8 (Ultralytics)
+* EasyOCR
+* OpenCV
+* NumPy
+
+### Backend
+
+* Python
+* Flask
+* SQLite Database
+* Threading
+
+### Frontend
+
+* HTML
+* CSS
+* JavaScript
+
+### Image Processing
+
+* CLAHE (Contrast Enhancement)
+* Gamma Correction
+* Bilateral Filtering
+* Unsharp Masking
+
+---
+
+# 📊 Performance
+
+| Metric                     | Value       |
+| -------------------------- | ----------- |
+| Plate Detection Accuracy   | ~95%        |
+| OCR Accuracy               | ~88%        |
+| End-to-End Processing Time | < 2 seconds |
+| Live Stream Frame Rate     | ~25 FPS     |
+
+---
+
+# 📂 Project Structure
+
+```
+ANPR-System
+│
+├── app.py
+├── detection.py
+├── ocr.py
+├── analytics.py
+├── database.db
+│
+├── static
+│   ├── css
+│   ├── js
+│   └── images
+│
+├── templates
+│   ├── index.html
+│   ├── dashboard.html
+│
+├── models
+│   └── yolov8_weights.pt
+│
+└── README.md
+```
+
+---
+
+# 🖥️ Installation
+
+Clone the repository:
+
+```
+git clone https://github.com/yourusername/anpr-system.git
+```
+
+Move into the project directory:
+
+```
+cd anpr-system
+```
+
+Install dependencies:
+
+```
+pip install -r requirements.txt
+```
+
+Run the application:
+
+```
 python app.py
-3. Open in browser
-http://localhost:5000
-⚠️ Note: yolov8m.pt model weights are not included due to GitHub file size limits (50MB).
-Download from: Ultralytics YOLOv8
+```
 
-📁 Project Structure
-CV-Group11-ANPR/
-├── app.py                 # Main Flask application
-├── analytics.py           # Analytics & charts
-├── database.py            # SQLite DB operations
-├── live_detection.py      # Camera + YOLO detection
-├── manual_detection.py    # Image upload detection
-├── ocr_module.py          # EasyOCR reader
-├── yolo_model.py          # YOLOv8 model loader
-├── night_mode.py          # Night enhancement pipeline
-├── speed_estimator.py     # Speed zone estimation
-├── multi_camera.py        # Multi-stream support
-├── utils.py               # Slot management + fuzzy match
-├── vehicle_attributes.py  # HSV color + type detection
-├── best.pt                # Trained YOLO model weights
-├── requirements.txt       # Python dependencies
-└── templates/             # HTML frontend
-📸 App Screenshots
+The system will start a local Flask server and open the dashboard.
 
 ---
 
-## Step 3 — Upload files
+# 📸 Example Output
 
+The system detects a vehicle plate and returns:
 
-**Batch 1 — Python files** (select all `.py` files):
-`analytics.py`, `app.py`, `database.py`, `live_detection.py`, `manual_detection.py`, `multi_camera.py`, `night_mode.py`, `ocr_module.py`, `speed_estimator.py`, `utils.py`, `vehicle_attributes.py`, `yolo_model.py`
+```
+Plate Number: GJ01AB1234
+Status: Allowed
+Confidence: 92%
+Time: 10:42 AM
+```
 
-**Batch 2 — Other files:**
-`best.pt`, `requirements.txt`
+All results are stored in the database and shown in the analytics dashboard.
 
-**Batch 3 — Folders:**
-Upload `templates/` folder contents
+---
 
+# 📈 Analytics Dashboard
 
+The system dashboard provides insights such as:
+
+* Hourly traffic heatmap
+* Entry vs exit statistics
+* OCR confidence distribution
+* Vehicle speed analytics
+* Anomaly detection alerts
+
+These analytics help management understand traffic patterns and improve security.
+
+---
+
+# 🔮 Future Improvements
+
+* Mobile application for guards
+* Cloud-based centralized dashboard
+* Automatic barrier gate integration
+* WhatsApp visitor verification
+* Face recognition for pedestrian entry
+* RFID + ANPR hybrid verification
+* GPU optimization for faster inference
+
+---
+
+# 👥 Team
+
+**Team 11 – PGDM Artificial Intelligence & Data Science**
+
+* Srashti Soni
+* Dwiti Budh
+* Digesh Patel
+* Ravindra Tanwar
+* Priya A
+
+---
+
+# 📜 License
+
+This project is created for **academic and research purposes**.
+Feel free to modify and extend the project for learning and experimentation.
 
 ---
 
 
 
----
-
-## 📁 Project Structure
-CV-Group11-ANPR/ ├── app.py # Main Flask application ├── analytics.py # Analytics & charts ├── database.py # SQLite DB operations ├── live_detection.py # Camera + YOLO detection ├── manual_detection.py # Image upload detection ├── ocr_module.py # EasyOCR reader ├── yolo_model.py # YOLOv8 model loader ├── night_mode.py # Night enhancement pipeline ├── speed_estimator.py # Speed zone estimation ├── multi_camera.py # Multi-stream support ├── utils.py # Slot management + fuzzy match ├── vehicle_attributes.py # HSV color + type detection ├── best.pt # Trained YOLO model weights ├── requirements.txt # Python dependencies └── templates/ # HTML frontend
-
- 
